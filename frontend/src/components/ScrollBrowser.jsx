@@ -10,23 +10,23 @@ const ScrollBrowser = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Browser movements with smoother easing
-  const browserX = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0, 400, -400, 0]);
-  const browserScale = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0.85, 1, 0.95, 1, 0.95, 1]);
-  const browserRotate = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0, -2, 2, 0]);
+  // Browser movements with smoother easing - slide in from right
+  const browserX = useTransform(scrollYProgress, [0, 0.15, 0.33, 0.5, 0.66, 0.85, 1], [200, 0, 0, 0, 0, 0, 200]);
+  const browserScale = useTransform(scrollYProgress, [0, 0.15, 0.4, 0.6, 0.8, 0.95, 1], [0.8, 1, 1, 1, 1, 1, 0.8]);
+  const browserOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.95, 1], [0, 0, 1, 1, 0]);
   
-  // Content opacity with progressive reveal
-  const content1Opacity = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.3], [0, 1, 1, 0]);
-  const content1Y = useTransform(scrollYProgress, [0, 0.15, 0.3], [40, 0, -40]);
+  // Content opacity with progressive reveal - text appears first
+  const content1Opacity = useTransform(scrollYProgress, [0, 0.08, 0.2, 0.28], [0, 1, 1, 0]);
+  const content1Y = useTransform(scrollYProgress, [0, 0.08, 0.28], [30, 0, -30]);
   
-  const content2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.55, 0.6], [0, 1, 1, 0]);
-  const content2Y = useTransform(scrollYProgress, [0.25, 0.35, 0.6], [40, 0, -40]);
+  const content2Opacity = useTransform(scrollYProgress, [0.25, 0.33, 0.58, 0.63], [0, 1, 1, 0]);
+  const content2Y = useTransform(scrollYProgress, [0.25, 0.33, 0.63], [30, 0, -30]);
   
-  const content3Opacity = useTransform(scrollYProgress, [0.58, 0.68, 0.88, 0.95], [0, 1, 1, 0]);
-  const content3Y = useTransform(scrollYProgress, [0.58, 0.68, 0.95], [40, 0, -40]);
+  const content3Opacity = useTransform(scrollYProgress, [0.6, 0.68, 0.88, 0.93], [0, 1, 1, 0]);
+  const content3Y = useTransform(scrollYProgress, [0.6, 0.68, 0.93], [30, 0, -30]);
   
-  const content4Opacity = useTransform(scrollYProgress, [0.88, 0.95], [0, 1]);
-  const content4Y = useTransform(scrollYProgress, [0.88, 0.95], [40, 0]);
+  const content4Opacity = useTransform(scrollYProgress, [0.9, 0.95], [0, 1]);
+  const content4Y = useTransform(scrollYProgress, [0.9, 0.95], [30, 0]);
   
   // Background color transition (green → beige)
   const backgroundColor = useTransform(
@@ -103,143 +103,126 @@ const ScrollBrowser = () => {
   return (
     <motion.div 
       ref={containerRef} 
-      className="relative h-[400vh]"
+      className="relative h-[400vh] overflow-hidden"
       style={{ backgroundColor }}
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Background parallax layer - decorative blobs */}
         <motion.div
           style={{ y: backgroundY }}
-          className="absolute inset-0 pointer-events-none overflow-hidden"
+          className="absolute inset-0 pointer-events-none overflow-hidden -z-10"
         >
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sage/10 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-warm/10 rounded-full blur-3xl" />
         </motion.div>
 
+        {/* Main Content Grid - Two Column Layout */}
         <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Floating background cards */}
-          <motion.div
-            style={{ y: backgroundY, opacity: 0.4 }}
-            className="absolute top-20 right-12 w-32 h-32 bg-sage/20 backdrop-blur-sm rounded-2xl shadow-lg pointer-events-none"
-          />
-          <motion.div
-            style={{ y: backgroundY, opacity: 0.3 }}
-            className="absolute bottom-32 left-20 w-40 h-40 bg-orange-warm/20 backdrop-blur-sm rounded-3xl shadow-lg pointer-events-none transform rotate-12"
-          />
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Text Content (Higher z-index) */}
+            <div className="relative z-30">
 
-          {/* Main browser with scale and rotation */}
-          <motion.div
-            style={{ 
-              x: browserX,
-              scale: browserScale,
-              rotateY: browserRotate,
-            }}
-            className="flex justify-center relative z-10"
-          >
-            <BrowserMockup />
-          </motion.div>
+              {/* Content 1 - Fade in from bottom */}
+              <motion.div
+                style={{ 
+                  opacity: content1Opacity,
+                  y: content1Y,
+                }}
+                className="space-y-4"
+              >
+                <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5">
+                  <Layout size={14} className="text-sage" />
+                  <span className="text-xs font-medium text-dark font-inter">Design</span>
+                </div>
+                <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
+                  Stunning<br />Websites
+                </h2>
+                <p className="text-muted font-inter text-base">
+                  That make your business look world class
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <PillBadge text="Mobile Ready" />
+                  <PillBadge text="Fast" />
+                  <PillBadge text="Premium" />
+                </div>
+              </motion.div>
 
-          {/* Foreground floating cards */}
-          <motion.div
-            style={{ y: foregroundY, opacity: 0.5 }}
-            className="absolute top-1/3 left-8 w-24 h-24 bg-cream/80 backdrop-blur-md border border-sage/30 rounded-xl shadow-2xl pointer-events-none"
-          />
-          <motion.div
-            style={{ y: foregroundY, opacity: 0.5 }}
-            className="absolute bottom-1/3 right-16 w-28 h-28 bg-cream/80 backdrop-blur-md border border-orange-warm/30 rounded-2xl shadow-2xl pointer-events-none transform -rotate-6"
-          />
+              {/* Content 2 - Fade in from bottom */}
+              <motion.div
+                style={{ 
+                  opacity: content2Opacity,
+                  y: content2Y,
+                }}
+                className="space-y-4"
+              >
+                <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
+                  Delivered in<br />7-10 Days
+                </h2>
+                <p className="text-muted font-inter text-base">
+                  Quick turnaround, zero compromise on quality
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <PillBadge text="Quick Delivery" />
+                  <PillBadge text="Revisions Included" />
+                </div>
+              </motion.div>
 
-          {/* Content 1 - Progressive reveal with Y movement */}
-          <motion.div
-            style={{ 
-              opacity: content1Opacity,
-              y: content1Y,
-            }}
-            className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
-          >
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-2"
-            >
-              <Layout size={14} className="text-sage" />
-              <span className="text-xs font-medium text-dark font-inter">Design</span>
-            </motion.div>
-            <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
-              Stunning<br />Websites
-            </h2>
-            <p className="text-muted font-inter text-lg">
-              That make your business look world class
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <PillBadge text="Mobile Ready" />
-              <PillBadge text="Fast" />
-              <PillBadge text="Premium" />
+              {/* Content 3 - Fade in from bottom */}
+              <motion.div
+                style={{ 
+                  opacity: content3Opacity,
+                  y: content3Y,
+                }}
+                className="space-y-4"
+              >
+                <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
+                  1 Year Free<br />Hosting
+                </h2>
+                <p className="text-muted font-inter text-base">
+                  We handle everything, you focus on business
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <PillBadge text="Free Hosting" />
+                  <PillBadge text="Free SSL" />
+                  <PillBadge text="Free Domain" />
+                </div>
+              </motion.div>
+
+              {/* Content 4 - Final reveal, centered */}
+              <motion.div
+                style={{ 
+                  opacity: content4Opacity,
+                  y: content4Y,
+                }}
+                className="space-y-4 text-center lg:text-left"
+              >
+                <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
+                  Your Business.<br />Online. Growing.
+                </h2>
+                <p className="text-muted font-inter text-base">
+                  Join 50+ businesses already growing with Pixvon
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2 justify-center lg:justify-start">
+                  <PillBadge text="50+ Clients" />
+                  <PillBadge text="Surat India" />
+                  <PillBadge text="Since 2024" />
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
 
-          {/* Content 2 - Progressive reveal */}
-          <motion.div
-            style={{ 
-              opacity: content2Opacity,
-              y: content2Y,
-            }}
-            className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
-          >
-            <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
-              Delivered in<br />7-10 Days
-            </h2>
-            <p className="text-muted font-inter text-lg">
-              Quick turnaround, zero compromise on quality
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <PillBadge text="Quick Delivery" />
-              <PillBadge text="Revisions Included" />
+            {/* Right Column - Browser UI (Lower z-index, slides in from right) */}
+            <div className="relative z-10 hidden lg:block">
+              <motion.div
+                style={{ 
+                  x: browserX,
+                  scale: browserScale,
+                  opacity: browserOpacity,
+                }}
+              >
+                <BrowserMockup />
+              </motion.div>
             </div>
-          </motion.div>
-
-          {/* Content 3 - Progressive reveal */}
-          <motion.div
-            style={{ 
-              opacity: content3Opacity,
-              y: content3Y,
-            }}
-            className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
-          >
-            <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
-              1 Year Free<br />Hosting
-            </h2>
-            <p className="text-muted font-inter text-lg">
-              We handle everything, you focus on business
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <PillBadge text="Free Hosting" />
-              <PillBadge text="Free SSL" />
-              <PillBadge text="Free Domain" />
-            </div>
-          </motion.div>
-
-          {/* Content 4 - Final reveal */}
-          <motion.div
-            style={{ 
-              opacity: content4Opacity,
-              y: content4Y,
-            }}
-            className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 max-w-2xl space-y-6 text-center"
-          >
-            <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
-              Your Business.<br />Online. Growing.
-            </h2>
-            <p className="text-muted font-inter text-lg">
-              Join 50+ businesses already growing with Pixvon
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <PillBadge text="50+ Clients" />
-              <PillBadge text="Surat India" />
-              <PillBadge text="Since 2024" />
-            </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>
