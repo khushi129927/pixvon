@@ -33,18 +33,18 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-32 bg-cream-dark">
-      <div className="max-w-4xl mx-auto px-6 lg:px-12">
+    <section className="py-20 bg-cream-dark">
+      <div className="max-w-3xl mx-auto px-6 lg:px-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-playfair font-bold text-5xl lg:text-7xl text-dark mb-20 text-center"
+          className="font-playfair font-bold text-3xl md:text-4xl lg:text-5xl text-dark mb-12 text-center"
         >
           Questions?
         </motion.h2>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -55,17 +55,17 @@ const FAQ = () => {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full bg-cream border border-dark/10 rounded-2xl p-6 hover:border-orange-warm/50 transition-all duration-300 text-left"
+                className="w-full bg-cream border border-dark/10 rounded-xl p-5 hover:border-orange-warm/50 transition-all duration-300 text-left"
               >
                 <div className="flex justify-between items-center">
-                  <h3 className="font-inter font-semibold text-lg text-dark pr-4">
+                  <h3 className="font-inter font-semibold text-base text-dark pr-4">
                     {faq.question}
                   </h3>
                   <div className="flex-shrink-0">
                     {openIndex === index ? (
-                      <Minus className="w-5 h-5 text-dark" />
+                      <Minus className="w-4 h-4 text-dark" />
                     ) : (
-                      <Plus className="w-5 h-5 text-dark" />
+                      <Plus className="w-4 h-4 text-dark" />
                     )}
                   </div>
                 </div>
@@ -79,7 +79,7 @@ const FAQ = () => {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="text-muted mt-4 font-inter leading-relaxed">
+                      <p className="text-muted mt-3 font-inter leading-relaxed text-sm">
                         {faq.answer}
                       </p>
                     </motion.div>

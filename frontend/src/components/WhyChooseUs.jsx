@@ -43,30 +43,24 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-32 bg-cream-dark relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 right-20 w-64 h-64 border border-sage/5 rounded-full" />
-        <div className="absolute bottom-20 left-20 w-48 h-48 border border-orange-warm/5 rounded-full" />
-      </div>
-
+    <section className="py-20 bg-cream-dark relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-4 py-2 mb-6">
-            <Sparkles size={16} className="text-sage" />
-            <span className="text-sm font-medium text-dark font-inter">Why Choose Us</span>
+          <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-4">
+            <Sparkles size={14} className="text-sage" />
+            <span className="text-xs font-medium text-dark font-inter">Why Choose Us</span>
           </div>
-          <h2 className="font-playfair font-bold text-5xl lg:text-7xl text-dark">
+          <h2 className="font-playfair font-bold text-3xl md:text-4xl lg:text-5xl text-dark">
             Why Choose Pixvon?
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const bgColor = feature.color === 'orange' ? 'from-orange-warm to-orange-warm/80' : 'from-sage to-sage/80';
@@ -79,7 +73,7 @@ const WhyChooseUs = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="bg-cream-card border border-dark/10 rounded-2xl p-8 hover:shadow-xl hover:border-orange-warm/50 transition-all duration-300 h-full relative overflow-hidden">
+                <div className="bg-cream-card border border-dark/10 rounded-xl p-6 hover:shadow-xl hover:border-orange-warm/50 transition-all duration-300 h-full relative overflow-hidden">
                   {/* Subtle dot pattern */}
                   <div className="absolute inset-0">
                     <div className="absolute inset-0" style={{
@@ -91,20 +85,20 @@ const WhyChooseUs = () => {
                   <div className="relative z-10">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className={`w-14 h-14 bg-gradient-to-br ${bgColor} rounded-xl flex items-center justify-center mb-6 shadow-lg`}
+                      className={`w-12 h-12 bg-gradient-to-br ${bgColor} rounded-xl flex items-center justify-center mb-4 shadow-lg`}
                     >
-                      <Icon className="w-7 h-7 text-white" />
+                      <Icon className="w-6 h-6 text-white" />
                     </motion.div>
-                    <h3 className="font-playfair font-bold text-xl text-dark mb-3">
+                    <h3 className="font-playfair font-bold text-lg text-dark mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-muted font-inter leading-relaxed">
+                    <p className="text-muted font-inter leading-relaxed text-sm">
                       {feature.description}
                     </p>
                   </div>
 
                   {/* Corner decoration */}
-                  <div className="absolute top-4 right-4 w-8 h-8 border-2 border-dark/5 rounded-full" />
+                  <div className="absolute top-3 right-3 w-6 h-6 border-2 border-dark/5 rounded-full" />
                 </div>
               </motion.div>
             );
