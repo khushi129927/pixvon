@@ -1,23 +1,16 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Layout, Image, Type, Smartphone } from 'lucide-react';
 
 const ScrollBrowser = () => {
   const containerRef = useRef(null);
   
-  // Track scroll progress through this section
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Transform scroll progress to browser X position
-  // 0% scroll -> 0 (center)
-  // 33% scroll -> 400 (right)
-  // 66% scroll -> -400 (left)
-  // 100% scroll -> 0 (center)
   const browserX = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0, 400, -400, 0]);
-
-  // Content opacity based on scroll position
   const content1Opacity = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
   const content2Opacity = useTransform(scrollYProgress, [0.25, 0.33, 0.5, 0.6], [0, 1, 1, 0]);
   const content3Opacity = useTransform(scrollYProgress, [0.58, 0.66, 0.85, 0.95], [0, 1, 1, 0]);
@@ -25,7 +18,6 @@ const ScrollBrowser = () => {
 
   const BrowserMockup = () => (
     <div className="bg-cream-dark border-2 border-dark/10 rounded-2xl shadow-2xl overflow-hidden w-full max-w-3xl">
-      {/* Browser Chrome */}
       <div className="bg-cream-dark border-b border-dark/10 p-4 flex items-center gap-2">
         <div className="flex gap-2">
           <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -37,17 +29,41 @@ const ScrollBrowser = () => {
         </div>
       </div>
       
-      {/* Browser Content */}
-      <div className="aspect-[4/3] bg-cream-card flex items-center justify-center relative">
-        <div className="absolute inset-0 p-12 flex flex-col justify-center">
-          {/* Mockup content placeholder */}
-          <div className="space-y-4">
-            <div className="h-12 bg-cream-dark rounded w-3/4" />
-            <div className="h-6 bg-cream-dark rounded w-1/2" />
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              <div className="h-24 bg-cream-dark rounded" />
-              <div className="h-24 bg-cream-dark rounded" />
-              <div className="h-24 bg-cream-dark rounded" />
+      <div className="aspect-[4/3] bg-gradient-to-br from-cream-card to-cream flex items-center justify-center relative">
+        {/* Website preview mockup */}
+        <div className="absolute inset-0 p-8">
+          {/* Header bar */}
+          <div className="h-12 bg-sage/20 rounded-lg mb-4 flex items-center px-4 gap-3">
+            <div className="w-20 h-4 bg-sage/40 rounded" />
+            <div className="ml-auto flex gap-2">
+              <div className="w-12 h-3 bg-sage/40 rounded" />
+              <div className="w-12 h-3 bg-sage/40 rounded" />
+              <div className="w-12 h-3 bg-sage/40 rounded" />
+            </div>
+          </div>
+          
+          {/* Hero section */}
+          <div className="h-32 bg-gradient-to-br from-sage/30 to-orange-warm/30 rounded-xl mb-4 p-6 flex items-center justify-between">
+            <div className="space-y-2 flex-1">
+              <div className="w-3/4 h-6 bg-dark/20 rounded" />
+              <div className="w-1/2 h-4 bg-dark/10 rounded" />
+              <div className="w-24 h-8 bg-dark/30 rounded-full mt-3" />
+            </div>
+            <div className="w-24 h-24 bg-dark/10 rounded-2xl flex items-center justify-center">
+              <Layout className="w-12 h-12 text-dark/30" />
+            </div>
+          </div>
+          
+          {/* Content grid */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="h-20 bg-orange-warm/20 rounded-lg flex items-center justify-center">
+              <Image className="w-8 h-8 text-orange-warm/60" />
+            </div>
+            <div className="h-20 bg-sage/20 rounded-lg flex items-center justify-center">
+              <Type className="w-8 h-8 text-sage/60" />
+            </div>
+            <div className="h-20 bg-orange-warm/20 rounded-lg flex items-center justify-center">
+              <Smartphone className="w-8 h-8 text-orange-warm/60" />
             </div>
           </div>
         </div>
@@ -56,17 +72,15 @@ const ScrollBrowser = () => {
   );
 
   const PillBadge = ({ text }) => (
-    <div className="inline-block bg-dark text-cream px-4 py-2 rounded-full text-xs font-medium font-inter">
+    <div className="inline-block bg-dark text-cream px-4 py-2 rounded-full text-xs font-medium font-inter shadow-lg">
       {text}
     </div>
   );
 
   return (
     <div ref={containerRef} className="relative h-[400vh] bg-cream">
-      {/* Sticky container */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Browser - moves with scroll */}
           <motion.div
             style={{ x: browserX }}
             className="flex justify-center"
@@ -74,11 +88,15 @@ const ScrollBrowser = () => {
             <BrowserMockup />
           </motion.div>
 
-          {/* Content 1 - 0% scroll */}
+          {/* Content 1 */}
           <motion.div
             style={{ opacity: content1Opacity }}
             className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
           >
+            <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-2">
+              <Layout size={14} className="text-sage" />
+              <span className="text-xs font-medium text-dark font-inter">Design</span>
+            </div>
             <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
               Stunning<br />Websites
             </h2>
@@ -92,7 +110,7 @@ const ScrollBrowser = () => {
             </div>
           </motion.div>
 
-          {/* Content 2 - 33% scroll */}
+          {/* Content 2 */}
           <motion.div
             style={{ opacity: content2Opacity }}
             className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
@@ -109,7 +127,7 @@ const ScrollBrowser = () => {
             </div>
           </motion.div>
 
-          {/* Content 3 - 66% scroll */}
+          {/* Content 3 */}
           <motion.div
             style={{ opacity: content3Opacity }}
             className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
@@ -127,7 +145,7 @@ const ScrollBrowser = () => {
             </div>
           </motion.div>
 
-          {/* Content 4 - 100% scroll */}
+          {/* Content 4 */}
           <motion.div
             style={{ opacity: content4Opacity }}
             className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 max-w-2xl space-y-6 text-center"
