@@ -26,19 +26,18 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-cream-dark">
+    <section id="services" className="py-16 bg-cream-dark">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-playfair font-bold text-3xl md:text-4xl lg:text-5xl text-dark mb-12 text-center"
+          className="font-playfair font-bold text-3xl md:text-4xl lg:text-5xl text-dark mb-10 text-center"
         >
           How It Works
         </motion.h2>
 
         <div className="relative">
-          {/* Connecting line */}
           <div className="hidden md:block absolute top-12 left-0 right-0 h-px bg-dark/20">
             <motion.div
               className="h-full bg-orange-warm"
@@ -49,7 +48,7 @@ const HowItWorks = () => {
             />
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-4 gap-5">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -59,13 +58,11 @@ const HowItWorks = () => {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="relative"
               >
-                <div className="bg-cream border border-dark/10 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-                  {/* Number circle */}
-                  <div className="w-10 h-10 mx-auto bg-dark text-cream rounded-full flex items-center justify-center mb-4 font-playfair font-bold text-sm">
+                <div className="bg-cream border border-dark/10 rounded-xl p-5 hover:shadow-lg transition-shadow duration-300">
+                  <div className="w-10 h-10 mx-auto bg-dark text-cream rounded-full flex items-center justify-center mb-3 font-playfair font-bold text-sm">
                     {step.number}
                   </div>
-
-                  <h3 className="font-playfair font-bold text-lg text-dark mb-2 text-center">
+                  <h3 className="font-playfair font-bold text-base text-dark mb-2 text-center">
                     {step.title}
                   </h3>
                   <p className="text-muted text-xs font-inter text-center leading-relaxed">

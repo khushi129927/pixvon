@@ -37,13 +37,13 @@ const Testimonials = () => {
   }, [testimonials.length]);
 
   return (
-    <section className="py-20 bg-cream-dark">
+    <section className="py-16 bg-cream-dark">
       <div className="max-w-3xl mx-auto px-6 lg:px-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-playfair font-bold text-3xl md:text-4xl lg:text-5xl text-dark mb-12 text-center"
+          className="font-playfair font-bold text-3xl md:text-4xl lg:text-5xl text-dark mb-10 text-center"
         >
           What Clients Say
         </motion.h2>
@@ -56,21 +56,16 @@ const Testimonials = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="bg-cream-card border border-dark/10 rounded-xl p-8"
+              className="bg-cream-card border border-dark/10 rounded-xl p-6"
             >
-              {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
+              <div className="flex justify-center gap-1 mb-5">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-orange-warm text-orange-warm" />
                 ))}
               </div>
-
-              {/* Quote */}
-              <p className="text-base text-dark text-center mb-6 font-inter leading-relaxed italic">
+              <p className="text-base text-dark text-center mb-5 font-inter leading-relaxed italic">
                 "{testimonials[currentIndex].text}"
               </p>
-
-              {/* Author */}
               <div className="text-center">
                 <div className="text-dark font-bold font-inter text-sm mb-1">
                   {testimonials[currentIndex].name}
@@ -82,16 +77,13 @@ const Testimonials = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mt-5">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-orange-warm w-6'
-                    : 'bg-dark/20'
+                  index === currentIndex ? 'bg-orange-warm w-6' : 'bg-dark/20'
                 }`}
               />
             ))}

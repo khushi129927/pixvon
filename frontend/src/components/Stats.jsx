@@ -41,9 +41,9 @@ const Stats = () => {
   ];
 
   return (
-    <section className="py-12 bg-cream border-y border-dark/10">
+    <section className="py-10 bg-cream border-y border-dark/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -53,7 +53,7 @@ const Stats = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-3xl md:text-4xl font-bold font-playfair text-dark mb-2">
+              <div className="text-3xl md:text-4xl font-bold font-playfair text-dark mb-1">
                 {stat.animated ? (
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 ) : (

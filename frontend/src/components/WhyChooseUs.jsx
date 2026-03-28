@@ -43,15 +43,15 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-cream-dark relative overflow-hidden">
+    <section className="py-16 bg-cream-dark relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-4">
+          <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-3">
             <Sparkles size={14} className="text-sage" />
             <span className="text-xs font-medium text-dark font-inter">Why Choose Us</span>
           </div>
@@ -60,7 +60,7 @@ const WhyChooseUs = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const bgColor = feature.color === 'orange' ? 'from-orange-warm to-orange-warm/80' : 'from-sage to-sage/80';
@@ -73,8 +73,7 @@ const WhyChooseUs = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="bg-cream-card border border-dark/10 rounded-xl p-6 hover:shadow-xl hover:border-orange-warm/50 transition-all duration-300 h-full relative overflow-hidden">
-                  {/* Subtle dot pattern */}
+                <div className="bg-cream-card border border-dark/10 rounded-xl p-5 hover:shadow-xl hover:border-orange-warm/50 transition-all duration-300 h-full relative overflow-hidden">
                   <div className="absolute inset-0">
                     <div className="absolute inset-0" style={{
                       backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px)',
@@ -85,20 +84,17 @@ const WhyChooseUs = () => {
                   <div className="relative z-10">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className={`w-12 h-12 bg-gradient-to-br ${bgColor} rounded-xl flex items-center justify-center mb-4 shadow-lg`}
+                      className={`w-11 h-11 bg-gradient-to-br ${bgColor} rounded-xl flex items-center justify-center mb-3 shadow-lg`}
                     >
-                      <Icon className="w-6 h-6 text-white" />
+                      <Icon className="w-5 h-5 text-white" />
                     </motion.div>
-                    <h3 className="font-playfair font-bold text-lg text-dark mb-2">
+                    <h3 className="font-playfair font-bold text-base text-dark mb-2">
                       {feature.title}
                     </h3>
                     <p className="text-muted font-inter leading-relaxed text-sm">
                       {feature.description}
                     </p>
                   </div>
-
-                  {/* Corner decoration */}
-                  <div className="absolute top-3 right-3 w-6 h-6 border-2 border-dark/5 rounded-full" />
                 </div>
               </motion.div>
             );
