@@ -92,12 +92,12 @@ const Hero = () => {
           </div>
 
           {/* Right side - 40% */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 mt-8 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="relative max-w-md mx-auto"
+              className="relative max-w-sm lg:max-w-md mx-auto"
             >
               {/* Organic Blob Shape */}
               <motion.div
@@ -114,7 +114,7 @@ const Hero = () => {
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="relative aspect-square overflow-hidden shadow-2xl"
+                className="relative aspect-square overflow-hidden shadow-2xl w-full max-w-[280px] sm:max-w-sm lg:max-w-md mx-auto"
                 style={{
                   background: 'linear-gradient(135deg, #7A9E7E 0%, #A8996C 40%, #C4854A 100%)',
                   boxShadow: '0 0 80px rgba(196, 133, 74, 0.3), 0 20px 60px rgba(0, 0, 0, 0.15)',
@@ -138,8 +138,8 @@ const Hero = () => {
                     }}
                     className="absolute top-[25%] left-[20%]"
                   >
-                    <div className="w-14 h-14 bg-cream/30 backdrop-blur-md border border-cream/40 rounded-2xl flex items-center justify-center shadow-lg">
-                      <Code className="w-7 h-7 text-cream" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-cream/30 backdrop-blur-md border border-cream/40 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-lg">
+                      <Code className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-cream" />
                     </div>
                   </motion.div>
 
@@ -157,8 +157,8 @@ const Hero = () => {
                     }}
                     className="absolute top-[30%] right-[18%]"
                   >
-                    <div className="w-14 h-14 bg-cream/30 backdrop-blur-md border border-cream/40 rounded-2xl flex items-center justify-center shadow-lg">
-                      <Palette className="w-7 h-7 text-cream" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-cream/30 backdrop-blur-md border border-cream/40 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-lg">
+                      <Palette className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-cream" />
                     </div>
                   </motion.div>
 
@@ -176,8 +176,8 @@ const Hero = () => {
                     }}
                     className="absolute bottom-[28%] left-[40%]"
                   >
-                    <div className="w-20 h-20 bg-cream/40 backdrop-blur-md border border-cream/50 rounded-3xl flex items-center justify-center shadow-xl">
-                      <Sparkles className="w-10 h-10 text-cream" />
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-cream/40 backdrop-blur-md border border-cream/50 rounded-2xl lg:rounded-3xl flex items-center justify-center shadow-xl">
+                      <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-cream" />
                     </div>
                   </motion.div>
                 </div>
@@ -192,9 +192,9 @@ const Hero = () => {
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
-                  className="absolute top-8 left-1/2 -translate-x-1/2"
+                  className="absolute top-4 sm:top-6 lg:top-8 left-1/2 -translate-x-1/2"
                 >
-                  <div className="bg-cream/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-medium text-dark font-inter shadow-2xl border border-cream/60">
+                  <div className="bg-cream/95 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-medium text-dark font-inter shadow-2xl border border-cream/60">
                     pixvon.co.in
                   </div>
                 </motion.div>
@@ -210,10 +210,10 @@ const Hero = () => {
                     ease: 'easeInOut',
                     delay: 0.8,
                   }}
-                  className="absolute bottom-8 right-8"
+                  className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8"
                 >
-                  <div className="w-16 h-16 bg-dark rounded-full flex items-center justify-center shadow-2xl">
-                    <span className="text-cream text-sm font-bold font-inter">50+</span>
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-dark rounded-full flex items-center justify-center shadow-2xl">
+                    <span className="text-cream text-xs sm:text-sm font-bold font-inter">50+</span>
                   </div>
                 </motion.div>
               </motion.div>
