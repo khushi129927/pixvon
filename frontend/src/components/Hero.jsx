@@ -14,8 +14,6 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen bg-cream pt-32 pb-20 px-6 lg:px-12 overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 w-32 h-32 border-2 border-sage/20 rounded-full" />
-        <div className="absolute bottom-40 left-10 w-24 h-24 border-2 border-orange-warm/20 rounded-full" />
         <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-orange-warm/40 rounded-full" />
         <div className="absolute bottom-1/3 left-1/4 w-2 h-2 bg-sage/40 rounded-full" />
       </div>
@@ -36,16 +34,16 @@ const Hero = () => {
               </div>
 
               <h1 className="font-playfair font-bold text-dark leading-[0.95] mb-6">
-                <span className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl block mb-2">
+                <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl block mb-2">
                   We Build
                 </span>
-                <span className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl block mb-2">
+                <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl block mb-2">
                   Websites That
                 </span>
-                <span className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl block">
+                <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl block">
                   <span className="text-orange-warm">Grow</span>
                 </span>
-                <span className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl block">
+                <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl block">
                   Your Business
                 </span>
               </h1>
