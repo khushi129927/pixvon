@@ -5,7 +5,7 @@ import { Toaster } from './components/ui/toaster';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-cream">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

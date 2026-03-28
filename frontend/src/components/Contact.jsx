@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, Phone } from 'lucide-react';
-import { Button } from './ui/button';
+import { Send, Phone } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { toast } from '../hooks/use-toast';
@@ -39,7 +38,7 @@ const Contact = () => {
           phone: formData.phone,
           message: formData.message,
           from_name: 'Pixvon Website',
-          subject: 'New Contact Form Submission from Pixvon.co.in',
+          subject: 'New Contact Form from Pixvon.co.in',
         }),
       });
 
@@ -47,7 +46,7 @@ const Contact = () => {
 
       if (result.success) {
         toast({
-          title: 'Message Sent Successfully!',
+          title: 'Message Sent!',
           description: "We'll get back to you within 24 hours.",
         });
         setFormData({
@@ -57,12 +56,12 @@ const Contact = () => {
           message: '',
         });
       } else {
-        throw new Error('Failed to send message');
+        throw new Error('Failed to send');
       }
     } catch (error) {
       toast({
         title: 'Error',
-        description: 'Failed to send message. Please try WhatsApp instead.',
+        description: 'Please try WhatsApp instead.',
         variant: 'destructive',
       });
     } finally {
@@ -71,176 +70,136 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-32 bg-cream">
+      <div className="max-w-6xl mx-auto px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-playfair font-bold text-5xl lg:text-7xl text-dark mb-8">
             Ready to Get Your Business Online?
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg text-muted font-inter">
             Contact us today for a free consultation
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Buttons */}
+          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="space-y-6"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Get In Touch
-              </h3>
-              <p className="text-slate-400 mb-8">
-                Prefer to reach out directly? Contact us via WhatsApp or Email
-              </p>
-            </div>
-
-            {/* WhatsApp Button */}
             <a
-              href="https://wa.me/919662522963?text=Hi%2C%20I%20want%20to%20build%20a%20website%20for%20my%20business"
+              href="https://wa.me/919662522963?text=Hi%2C%20I%20want%20to%20build%20a%20website"
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
+              className="flex items-center justify-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full font-medium font-inter hover:bg-green-700 transition-all duration-300 hover:scale-105"
             >
-              <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-6 text-lg rounded-xl shadow-lg shadow-green-500/30 hover:shadow-green-500/50 transition-all duration-300 hover:scale-105">
-                <Phone className="mr-2 w-5 h-5" />
-                WhatsApp Us
-              </Button>
+              <Phone size={20} />
+              WhatsApp Us
             </a>
 
-            {/* Email Button */}
             <a
               href="mailto:hello@pixvon.co.in"
-              className="block"
+              className="flex items-center justify-center gap-3 bg-dark text-cream px-8 py-4 rounded-full font-medium font-inter hover:bg-dark/90 transition-all duration-300 hover:scale-105"
             >
-              <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-6 text-lg rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
-                <Mail className="mr-2 w-5 h-5" />
-                Email Us
-              </Button>
+              <Send size={20} />
+              Email Us
             </a>
 
-            {/* Contact Info */}
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 space-y-4">
-              <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
-                <div>
-                  <div className="text-sm text-slate-400 mb-1">Phone</div>
-                  <div className="text-white font-medium">+91 9662522963</div>
-                </div>
+            <div className="bg-cream-card border border-dark/10 rounded-2xl p-6 space-y-4 mt-8">
+              <div>
+                <div className="text-xs text-muted font-inter mb-1">Phone</div>
+                <div className="text-dark font-inter font-medium">+91 9662522963</div>
               </div>
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
-                <div>
-                  <div className="text-sm text-slate-400 mb-1">Email</div>
-                  <div className="text-white font-medium">hello@pixvon.co.in</div>
-                </div>
+              <div>
+                <div className="text-xs text-muted font-inter mb-1">Email</div>
+                <div className="text-dark font-inter font-medium">hello@pixvon.co.in</div>
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
+            <form onSubmit={handleSubmit} className="bg-cream-card border border-dark/10 rounded-2xl p-8 space-y-5">
+              <h3 className="font-playfair font-bold text-2xl text-dark mb-6">Send a Message</h3>
               
-              <div className="space-y-5">
-                <div>
-                  <label className="text-slate-300 text-sm font-medium mb-2 block">
-                    Your Name *
-                  </label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-slate-800 border-slate-700 text-white focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="Enter your name"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-slate-300 text-sm font-medium mb-2 block">
-                    Business Name *
-                  </label>
-                  <Input
-                    type="text"
-                    name="businessName"
-                    value={formData.businessName}
-                    onChange={handleChange}
-                    required
-                    className="bg-slate-800 border-slate-700 text-white focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="Enter your business name"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-slate-300 text-sm font-medium mb-2 block">
-                    Phone Number *
-                  </label>
-                  <Input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="bg-slate-800 border-slate-700 text-white focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-slate-300 text-sm font-medium mb-2 block">
-                    Message *
-                  </label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={4}
-                    className="bg-slate-800 border-slate-700 text-white focus:border-blue-500 focus:ring-blue-500 resize-none"
-                    placeholder="Tell us about your business and what you need"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-6 text-lg rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    'Sending...'
-                  ) : (
-                    <>
-                      <Send className="mr-2 w-5 h-5" />
-                      Send Message
-                    </>
-                  )}
-                </Button>
+              <div>
+                <label className="text-dark text-sm font-medium font-inter mb-2 block">
+                  Your Name *
+                </label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="bg-cream border-dark/20 text-dark focus:border-orange-warm"
+                  placeholder="Enter your name"
+                />
               </div>
+
+              <div>
+                <label className="text-dark text-sm font-medium font-inter mb-2 block">
+                  Business Name *
+                </label>
+                <Input
+                  type="text"
+                  name="businessName"
+                  value={formData.businessName}
+                  onChange={handleChange}
+                  required
+                  className="bg-cream border-dark/20 text-dark focus:border-orange-warm"
+                  placeholder="Your business name"
+                />
+              </div>
+
+              <div>
+                <label className="text-dark text-sm font-medium font-inter mb-2 block">
+                  Phone *
+                </label>
+                <Input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="bg-cream border-dark/20 text-dark focus:border-orange-warm"
+                  placeholder="Your phone number"
+                />
+              </div>
+
+              <div>
+                <label className="text-dark text-sm font-medium font-inter mb-2 block">
+                  Message *
+                </label>
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={4}
+                  className="bg-cream border-dark/20 text-dark focus:border-orange-warm resize-none"
+                  placeholder="Tell us about your business"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-dark text-cream px-8 py-4 rounded-full font-medium font-inter hover:bg-dark/90 transition-all duration-300 hover:scale-105 disabled:opacity-50"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
             </form>
           </motion.div>
         </div>

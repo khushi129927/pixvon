@@ -1,11 +1,12 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import StatsBar from '../components/StatsBar';
+import ScrollBrowser from '../components/ScrollBrowser';
+import Stats from '../components/Stats';
 import HowItWorks from '../components/HowItWorks';
-import Portfolio from '../components/Portfolio';
 import Industries from '../components/Industries';
 import WhyChooseUs from '../components/WhyChooseUs';
+import Portfolio from '../components/Portfolio';
 import Testimonials from '../components/Testimonials';
 import About from '../components/About';
 import FAQ from '../components/FAQ';
@@ -14,14 +15,15 @@ import Footer from '../components/Footer';
 
 const Home = () => {
   return (
-    <div className="bg-slate-950 min-h-screen">
+    <div className="bg-cream min-h-screen">
       <Navbar />
       <Hero />
-      <StatsBar />
+      <ScrollBrowser />
+      <Stats />
       <HowItWorks />
-      <Portfolio />
       <Industries />
       <WhyChooseUs />
+      <Portfolio />
       <Testimonials />
       <About />
       <FAQ />

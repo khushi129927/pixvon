@@ -7,52 +7,46 @@ const WhyChooseUs = () => {
     {
       icon: DollarSign,
       title: 'Affordable Pricing',
-      description: 'Professional websites starting at just ₹4,000 - perfect for small businesses',
+      description: 'Professional websites starting at just ₹4,000',
     },
     {
       icon: Zap,
       title: 'Fast Delivery',
-      description: 'Your website ready in just 7-10 days - no long waiting periods',
+      description: 'Your website ready in just 7-10 days',
     },
     {
       icon: Smartphone,
       title: 'Mobile Friendly',
-      description: '100% responsive design that looks perfect on all devices',
+      description: '100% responsive design on all devices',
     },
     {
       icon: Server,
       title: '1 Year Free Hosting',
-      description: 'Free domain and hosting included for the first year',
+      description: 'Free domain and hosting for first year',
     },
     {
       icon: MessageSquare,
       title: 'WhatsApp Support',
-      description: 'Direct WhatsApp support for quick assistance whenever you need',
+      description: 'Direct support whenever you need',
     },
     {
       icon: TrendingUp,
       title: 'SEO Ready',
-      description: 'Built with SEO best practices to help your business get found online',
+      description: 'Built to be found on Google',
     },
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+    <section className="py-32 bg-cream-dark">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="font-playfair font-bold text-5xl lg:text-7xl text-dark mb-20 text-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Why Choose Pixvon?
-          </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            We make getting your business online simple, affordable, and hassle-free
-          </p>
-        </motion.div>
+          Why Choose Pixvon?
+        </motion.h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => {
@@ -64,19 +58,17 @@ const WhyChooseUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group"
+                className="bg-cream-card border border-dark/10 rounded-2xl p-8 hover:shadow-lg hover:border-orange-warm/50 transition-all duration-300"
               >
-                <div className="bg-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed">
-                    {feature.description}
-                  </p>
+                <div className="w-12 h-12 bg-dark rounded-xl flex items-center justify-center mb-6">
+                  <Icon className="w-6 h-6 text-cream" />
                 </div>
+                <h3 className="font-playfair font-bold text-xl text-dark mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-muted font-inter leading-relaxed">
+                  {feature.description}
+                </p>
               </motion.div>
             );
           })}

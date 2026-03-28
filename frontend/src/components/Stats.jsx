@@ -32,35 +32,35 @@ const AnimatedCounter = ({ value, suffix = '' }) => {
   );
 };
 
-const StatsBar = () => {
+const Stats = () => {
   const stats = [
     { value: 50, suffix: '+', label: 'Clients Served', animated: true },
     { value: 100, suffix: '%', label: 'Mobile Friendly', animated: true },
-    { value: 1, suffix: ' Year', label: 'Free Hosting Included', animated: false },
+    { value: 1, suffix: ' Year', label: 'Free Hosting', animated: false },
     { value: 10, suffix: ' Days', label: 'Delivery Time', animated: true },
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-teal-50 via-cyan-50 to-teal-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 py-16 md:py-20 border-y border-teal-200 dark:border-slate-700">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+    <section className="py-20 bg-cream border-y border-dark/10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-teal-500 to-cyan-600 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent mb-2">
+              <div className="text-5xl font-bold font-playfair text-dark mb-3">
                 {stat.animated ? (
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 ) : (
                   <span>{stat.value}{stat.suffix}</span>
                 )}
               </div>
-              <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium">
+              <div className="text-sm text-muted font-inter">
                 {stat.label}
               </div>
             </motion.div>
@@ -71,4 +71,4 @@ const StatsBar = () => {
   );
 };
 
-export default StatsBar;
+export default Stats;
