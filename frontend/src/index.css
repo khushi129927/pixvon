@@ -30,3 +30,8 @@ code {
 .font-inter {
     font-family: 'Inter', sans-serif;
 }
+
+/* Hide Emergent badge */
+#emergent-badge {
+    display: none !important;
+}
