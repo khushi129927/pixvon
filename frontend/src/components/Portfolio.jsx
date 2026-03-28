@@ -40,7 +40,7 @@ const Portfolio = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* PDF Specification Builder */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -52,7 +52,7 @@ const Portfolio = () => {
             className="group"
           >
             <div 
-              className="relative aspect-[3/4] rounded-t-full overflow-hidden mb-4 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2" 
+              className="relative aspect-[4/5] max-w-sm mx-auto rounded-t-full overflow-hidden mb-4 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2" 
               style={{
                 background: 'linear-gradient(to bottom, #7A9E7E 0%, #C4854A 100%)',
               }}
@@ -64,7 +64,7 @@ const Portfolio = () => {
               }} />
 
               {/* Dark gradient overlay at bottom for text readability */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/50 via-black/30 to-transparent" />
 
               {/* Inner glow */}
               <div className="absolute inset-0 rounded-t-full shadow-inner opacity-50" />
@@ -78,7 +78,7 @@ const Portfolio = () => {
                     rotate: hoveredIndex === 0 ? -3 : -2,
                   }}
                   transition={{ duration: 0.3 }}
-                  className="relative w-32 h-40 bg-white/90 rounded-lg shadow-2xl mb-8"
+                  className="relative w-28 h-36 bg-white/90 rounded-lg shadow-2xl mb-6"
                   style={{ transform: 'rotate(-2deg)' }}
                 >
                   {/* PDF Header */}
@@ -133,11 +133,11 @@ const Portfolio = () => {
                 </motion.div>
 
                 {/* Title at bottom */}
-                <div className="absolute bottom-8 left-0 right-0 text-center px-6">
-                  <div className="text-cream font-playfair font-bold text-xl mb-1">
+                <div className="absolute bottom-6 left-0 right-0 text-center px-4">
+                  <div className="text-white font-playfair font-bold text-lg mb-1 drop-shadow-lg">
                     PDF Specification Builder
                   </div>
-                  <div className="text-cream/80 font-inter text-xs">
+                  <div className="text-white/90 font-inter text-xs drop-shadow-md">
                     Document Management
                   </div>
                 </div>
@@ -175,7 +175,7 @@ const Portfolio = () => {
             className="group"
           >
             <div 
-              className="relative aspect-[3/4] rounded-t-full overflow-hidden mb-4 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2" 
+              className="relative aspect-[4/5] max-w-sm mx-auto rounded-t-full overflow-hidden mb-4 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2" 
               style={{
                 background: 'linear-gradient(to bottom, #7A9E7E 0%, #C4854A 100%)',
               }}
@@ -187,7 +187,7 @@ const Portfolio = () => {
               }} />
 
               {/* Dark gradient overlay at bottom */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/50 via-black/30 to-transparent" />
 
               {/* Inner glow */}
               <div className="absolute inset-0 rounded-t-full shadow-inner opacity-50" />
@@ -201,7 +201,7 @@ const Portfolio = () => {
                     rotate: hoveredIndex === 1 ? 2 : 0,
                   }}
                   transition={{ duration: 0.3 }}
-                  className="relative w-36 h-48 bg-gray-900 rounded-2xl shadow-2xl mb-8 p-2"
+                  className="relative w-32 h-44 bg-gray-900 rounded-2xl shadow-2xl mb-6 p-2"
                 >
                   {/* Device Screen */}
                   <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-50 rounded-xl overflow-hidden">
@@ -272,11 +272,11 @@ const Portfolio = () => {
                 </motion.div>
 
                 {/* Title at bottom */}
-                <div className="absolute bottom-8 left-0 right-0 text-center px-6">
-                  <div className="text-cream font-playfair font-bold text-xl mb-1">
+                <div className="absolute bottom-6 left-0 right-0 text-center px-4">
+                  <div className="text-white font-playfair font-bold text-lg mb-1 drop-shadow-lg">
                     Table Order System
                   </div>
-                  <div className="text-cream/80 font-inter text-xs">
+                  <div className="text-white/90 font-inter text-xs drop-shadow-md">
                     Restaurant Management
                   </div>
                 </div>
