@@ -97,53 +97,125 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="relative max-w-sm mx-auto"
+              className="relative max-w-md mx-auto"
             >
-              {/* Arched Frame */}
+              {/* Organic Blob Shape */}
               <motion.div
                 animate={{
-                  y: [0, -10, 0],
+                  borderRadius: [
+                    '60% 40% 30% 70% / 60% 30% 70% 40%',
+                    '30% 60% 70% 40% / 50% 60% 30% 60%',
+                    '50% 50% 40% 60% / 40% 70% 30% 50%',
+                    '60% 40% 30% 70% / 60% 30% 70% 40%',
+                  ],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 8,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="relative aspect-[3/4] rounded-t-full overflow-hidden shadow-2xl"
+                className="relative aspect-square overflow-hidden shadow-2xl"
                 style={{
-                  background: 'linear-gradient(to bottom, #7A9E7E 0%, #C4854A 100%)',
+                  background: 'linear-gradient(135deg, #7A9E7E 0%, #A8996C 40%, #C4854A 100%)',
+                  boxShadow: '0 0 80px rgba(196, 133, 74, 0.3), 0 20px 60px rgba(0, 0, 0, 0.15)',
                 }}
               >
-                {/* Decorative icons inside */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-6">
-                    <div className="flex justify-center gap-4">
-                      <div className="w-12 h-12 bg-cream/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                        <Code className="w-6 h-6 text-cream" />
-                      </div>
-                      <div className="w-12 h-12 bg-cream/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                        <Palette className="w-6 h-6 text-cream" />
-                      </div>
+                {/* Soft glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-warm/20 via-transparent to-transparent" />
+                
+                {/* Floating icons inside - randomly positioned */}
+                <div className="absolute inset-0">
+                  {/* Code icon - top left area */}
+                  <motion.div
+                    animate={{
+                      y: [0, -15, 0],
+                      x: [0, 10, 0],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    className="absolute top-[25%] left-[20%]"
+                  >
+                    <div className="w-14 h-14 bg-cream/30 backdrop-blur-md border border-cream/40 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Code className="w-7 h-7 text-cream" />
                     </div>
-                    <div className="w-16 h-16 mx-auto bg-cream/30 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                      <Sparkles className="w-8 h-8 text-cream" />
+                  </motion.div>
+
+                  {/* Palette icon - top right area */}
+                  <motion.div
+                    animate={{
+                      y: [0, 20, 0],
+                      x: [0, -12, 0],
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: 0.5,
+                    }}
+                    className="absolute top-[30%] right-[18%]"
+                  >
+                    <div className="w-14 h-14 bg-cream/30 backdrop-blur-md border border-cream/40 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Palette className="w-7 h-7 text-cream" />
                     </div>
-                  </div>
+                  </motion.div>
+
+                  {/* Sparkles icon - center bottom */}
+                  <motion.div
+                    animate={{
+                      y: [0, -18, 0],
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{
+                      duration: 4.5,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: 1,
+                    }}
+                    className="absolute bottom-[28%] left-[40%]"
+                  >
+                    <div className="w-20 h-20 bg-cream/40 backdrop-blur-md border border-cream/50 rounded-3xl flex items-center justify-center shadow-xl">
+                      <Sparkles className="w-10 h-10 text-cream" />
+                    </div>
+                  </motion.div>
                 </div>
 
-                {/* Floating label inside */}
-                <div className="absolute top-6 left-1/2 -translate-x-1/2">
-                  <div className="bg-cream/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-medium text-dark font-inter shadow-lg">
+                {/* Floating label inside - top */}
+                <motion.div
+                  animate={{
+                    y: [0, -8, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                  className="absolute top-8 left-1/2 -translate-x-1/2"
+                >
+                  <div className="bg-cream/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-medium text-dark font-inter shadow-2xl border border-cream/60">
                     pixvon.co.in
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Circular badge bottom right */}
-                <div className="absolute bottom-6 right-6">
-                  <div className="w-12 h-12 bg-dark rounded-full flex items-center justify-center shadow-xl">
-                    <span className="text-cream text-xs font-bold font-inter">50+</span>
+                <motion.div
+                  animate={{
+                    y: [0, 10, 0],
+                  }}
+                  transition={{
+                    duration: 3.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: 0.8,
+                  }}
+                  className="absolute bottom-8 right-8"
+                >
+                  <div className="w-16 h-16 bg-dark rounded-full flex items-center justify-center shadow-2xl">
+                    <span className="text-cream text-sm font-bold font-inter">50+</span>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>

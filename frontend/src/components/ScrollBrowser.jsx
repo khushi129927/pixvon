@@ -10,11 +10,34 @@ const ScrollBrowser = () => {
     offset: ['start start', 'end end'],
   });
 
+  // Browser movements with smoother easing
   const browserX = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0, 400, -400, 0]);
-  const content1Opacity = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
-  const content2Opacity = useTransform(scrollYProgress, [0.25, 0.33, 0.5, 0.6], [0, 1, 1, 0]);
-  const content3Opacity = useTransform(scrollYProgress, [0.58, 0.66, 0.85, 0.95], [0, 1, 1, 0]);
-  const content4Opacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+  const browserScale = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0.85, 1, 0.95, 1, 0.95, 1]);
+  const browserRotate = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0, -2, 2, 0]);
+  
+  // Content opacity with progressive reveal
+  const content1Opacity = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.3], [0, 1, 1, 0]);
+  const content1Y = useTransform(scrollYProgress, [0, 0.15, 0.3], [40, 0, -40]);
+  
+  const content2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.55, 0.6], [0, 1, 1, 0]);
+  const content2Y = useTransform(scrollYProgress, [0.25, 0.35, 0.6], [40, 0, -40]);
+  
+  const content3Opacity = useTransform(scrollYProgress, [0.58, 0.68, 0.88, 0.95], [0, 1, 1, 0]);
+  const content3Y = useTransform(scrollYProgress, [0.58, 0.68, 0.95], [40, 0, -40]);
+  
+  const content4Opacity = useTransform(scrollYProgress, [0.88, 0.95], [0, 1]);
+  const content4Y = useTransform(scrollYProgress, [0.88, 0.95], [40, 0]);
+  
+  // Background color transition (green → beige)
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 0.33, 0.66, 1],
+    ['#F2EDE4', '#E8F0E8', '#F2EDE4', '#EDE7DC']
+  );
+  
+  // Parallax layers
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const foregroundY = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   const BrowserMockup = () => (
     <div className="bg-cream-dark border-2 border-dark/10 rounded-2xl shadow-2xl overflow-hidden w-full max-w-3xl">
@@ -78,25 +101,71 @@ const ScrollBrowser = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] bg-cream">
+    <motion.div 
+      ref={containerRef} 
+      className="relative h-[400vh]"
+      style={{ backgroundColor }}
+    >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        {/* Background parallax layer - decorative blobs */}
+        <motion.div
+          style={{ y: backgroundY }}
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+        >
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sage/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-warm/10 rounded-full blur-3xl" />
+        </motion.div>
+
         <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12">
+          {/* Floating background cards */}
           <motion.div
-            style={{ x: browserX }}
-            className="flex justify-center"
+            style={{ y: backgroundY, opacity: 0.4 }}
+            className="absolute top-20 right-12 w-32 h-32 bg-sage/20 backdrop-blur-sm rounded-2xl shadow-lg pointer-events-none"
+          />
+          <motion.div
+            style={{ y: backgroundY, opacity: 0.3 }}
+            className="absolute bottom-32 left-20 w-40 h-40 bg-orange-warm/20 backdrop-blur-sm rounded-3xl shadow-lg pointer-events-none transform rotate-12"
+          />
+
+          {/* Main browser with scale and rotation */}
+          <motion.div
+            style={{ 
+              x: browserX,
+              scale: browserScale,
+              rotateY: browserRotate,
+            }}
+            className="flex justify-center relative z-10"
           >
             <BrowserMockup />
           </motion.div>
 
-          {/* Content 1 */}
+          {/* Foreground floating cards */}
           <motion.div
-            style={{ opacity: content1Opacity }}
+            style={{ y: foregroundY, opacity: 0.5 }}
+            className="absolute top-1/3 left-8 w-24 h-24 bg-cream/80 backdrop-blur-md border border-sage/30 rounded-xl shadow-2xl pointer-events-none"
+          />
+          <motion.div
+            style={{ y: foregroundY, opacity: 0.5 }}
+            className="absolute bottom-1/3 right-16 w-28 h-28 bg-cream/80 backdrop-blur-md border border-orange-warm/30 rounded-2xl shadow-2xl pointer-events-none transform -rotate-6"
+          />
+
+          {/* Content 1 - Progressive reveal with Y movement */}
+          <motion.div
+            style={{ 
+              opacity: content1Opacity,
+              y: content1Y,
+            }}
             className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
           >
-            <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-2">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5 mb-2"
+            >
               <Layout size={14} className="text-sage" />
               <span className="text-xs font-medium text-dark font-inter">Design</span>
-            </div>
+            </motion.div>
             <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
               Stunning<br />Websites
             </h2>
@@ -110,9 +179,12 @@ const ScrollBrowser = () => {
             </div>
           </motion.div>
 
-          {/* Content 2 */}
+          {/* Content 2 - Progressive reveal */}
           <motion.div
-            style={{ opacity: content2Opacity }}
+            style={{ 
+              opacity: content2Opacity,
+              y: content2Y,
+            }}
             className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
           >
             <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
@@ -127,9 +199,12 @@ const ScrollBrowser = () => {
             </div>
           </motion.div>
 
-          {/* Content 3 */}
+          {/* Content 3 - Progressive reveal */}
           <motion.div
-            style={{ opacity: content3Opacity }}
+            style={{ 
+              opacity: content3Opacity,
+              y: content3Y,
+            }}
             className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 max-w-md space-y-6"
           >
             <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
@@ -145,9 +220,12 @@ const ScrollBrowser = () => {
             </div>
           </motion.div>
 
-          {/* Content 4 */}
+          {/* Content 4 - Final reveal */}
           <motion.div
-            style={{ opacity: content4Opacity }}
+            style={{ 
+              opacity: content4Opacity,
+              y: content4Y,
+            }}
             className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 max-w-2xl space-y-6 text-center"
           >
             <h2 className="font-playfair font-bold text-4xl lg:text-6xl text-dark leading-tight">
@@ -164,7 +242,7 @@ const ScrollBrowser = () => {
           </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
