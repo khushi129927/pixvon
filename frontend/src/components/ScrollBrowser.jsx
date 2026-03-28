@@ -10,23 +10,23 @@ const ScrollBrowser = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Browser movements with smoother easing - slide in from right
-  const browserX = useTransform(scrollYProgress, [0, 0.15, 0.33, 0.5, 0.66, 0.85, 1], [200, 0, 0, 0, 0, 0, 200]);
-  const browserScale = useTransform(scrollYProgress, [0, 0.15, 0.4, 0.6, 0.8, 0.95, 1], [0.8, 1, 1, 1, 1, 1, 0.8]);
-  const browserOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.95, 1], [0, 0, 1, 1, 0]);
+  // Browser movements - stays visible throughout, slight 3D effects
+  const browserScale = useTransform(scrollYProgress, [0, 0.1, 0.5, 0.9, 1], [0.92, 1, 1, 1, 0.95]);
+  const browserRotateY = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0, -2, 0, 2, 0]);
+  const browserY = useTransform(scrollYProgress, [0, 0.5, 1], [0, -15, 0]);
   
-  // Content opacity with progressive reveal - text appears first
-  const content1Opacity = useTransform(scrollYProgress, [0, 0.08, 0.2, 0.28], [0, 1, 1, 0]);
-  const content1Y = useTransform(scrollYProgress, [0, 0.08, 0.28], [30, 0, -30]);
+  // Content opacity with progressive reveal - longer visibility windows (each ~25% of scroll)
+  const content1Opacity = useTransform(scrollYProgress, [0, 0.1, 0.22, 0.32], [0, 1, 1, 0]);
+  const content1Y = useTransform(scrollYProgress, [0, 0.1, 0.32], [30, 0, -15]);
   
-  const content2Opacity = useTransform(scrollYProgress, [0.25, 0.33, 0.58, 0.63], [0, 1, 1, 0]);
-  const content2Y = useTransform(scrollYProgress, [0.25, 0.33, 0.63], [30, 0, -30]);
+  const content2Opacity = useTransform(scrollYProgress, [0.28, 0.35, 0.52, 0.62], [0, 1, 1, 0]);
+  const content2Y = useTransform(scrollYProgress, [0.28, 0.35, 0.62], [30, 0, -15]);
   
-  const content3Opacity = useTransform(scrollYProgress, [0.6, 0.68, 0.88, 0.93], [0, 1, 1, 0]);
-  const content3Y = useTransform(scrollYProgress, [0.6, 0.68, 0.93], [30, 0, -30]);
+  const content3Opacity = useTransform(scrollYProgress, [0.58, 0.65, 0.82, 0.90], [0, 1, 1, 0]);
+  const content3Y = useTransform(scrollYProgress, [0.58, 0.65, 0.90], [30, 0, -15]);
   
-  const content4Opacity = useTransform(scrollYProgress, [0.9, 0.95], [0, 1]);
-  const content4Y = useTransform(scrollYProgress, [0.9, 0.95], [30, 0]);
+  const content4Opacity = useTransform(scrollYProgress, [0.86, 0.91, 1], [0, 1, 1]);
+  const content4Y = useTransform(scrollYProgress, [0.86, 0.91], [30, 0]);
   
   // Background color transition (green → beige)
   const backgroundColor = useTransform(
@@ -35,9 +35,15 @@ const ScrollBrowser = () => {
     ['#F2EDE4', '#E8F0E8', '#F2EDE4', '#EDE7DC']
   );
   
-  // Parallax layers
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const foregroundY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  // Parallax layers - slower movement for depth
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  
+  // Floating decorative cards
+  const floatCard1Y = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const floatCard1Rotate = useTransform(scrollYProgress, [0, 1], [0, 15]);
+  
+  const floatCard2Y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const floatCard2Rotate = useTransform(scrollYProgress, [0, 1], [0, -12]);
 
   const BrowserMockup = () => (
     <div className="bg-cream-dark border-2 border-dark/10 rounded-2xl shadow-2xl overflow-hidden w-full max-w-3xl">
@@ -116,19 +122,34 @@ const ScrollBrowser = () => {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-warm/10 rounded-full blur-3xl" />
         </motion.div>
 
+        {/* Floating decorative cards - parallax effect */}
+        <motion.div
+          style={{ 
+            y: floatCard1Y,
+            rotate: floatCard1Rotate,
+          }}
+          className="absolute top-20 right-16 w-40 h-40 bg-sage/15 backdrop-blur-sm rounded-3xl shadow-xl pointer-events-none z-0 hidden lg:block"
+        />
+        <motion.div
+          style={{ 
+            y: floatCard2Y,
+            rotate: floatCard2Rotate,
+          }}
+          className="absolute bottom-32 left-16 w-48 h-32 bg-orange-warm/15 backdrop-blur-sm rounded-3xl shadow-xl pointer-events-none z-0 hidden lg:block"
+        />
+
         {/* Main Content Grid - Two Column Layout */}
         <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Text Content (Higher z-index) */}
-            <div className="relative z-30">
-
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column - Text Content (Higher z-index) - All positioned absolutely to overlap */}
+            <div className="relative z-30 min-h-[400px]">
               {/* Content 1 - Fade in from bottom */}
               <motion.div
                 style={{ 
                   opacity: content1Opacity,
                   y: content1Y,
                 }}
-                className="space-y-4"
+                className="absolute inset-0 space-y-4"
               >
                 <div className="inline-flex items-center gap-2 bg-sage/10 border border-sage/20 rounded-full px-3 py-1.5">
                   <Layout size={14} className="text-sage" />
@@ -153,7 +174,7 @@ const ScrollBrowser = () => {
                   opacity: content2Opacity,
                   y: content2Y,
                 }}
-                className="space-y-4"
+                className="absolute inset-0 space-y-4"
               >
                 <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
                   Delivered in<br />7-10 Days
@@ -173,7 +194,7 @@ const ScrollBrowser = () => {
                   opacity: content3Opacity,
                   y: content3Y,
                 }}
-                className="space-y-4"
+                className="absolute inset-0 space-y-4"
               >
                 <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
                   1 Year Free<br />Hosting
@@ -194,7 +215,7 @@ const ScrollBrowser = () => {
                   opacity: content4Opacity,
                   y: content4Y,
                 }}
-                className="space-y-4 text-center lg:text-left"
+                className="absolute inset-0 space-y-4 text-center lg:text-left"
               >
                 <h2 className="font-playfair font-bold text-4xl lg:text-5xl text-dark leading-tight">
                   Your Business.<br />Online. Growing.
@@ -210,14 +231,15 @@ const ScrollBrowser = () => {
               </motion.div>
             </div>
 
-            {/* Right Column - Browser UI (Lower z-index, slides in from right) */}
+            {/* Right Column - Browser UI (Lower z-index, subtle 3D effect) */}
             <div className="relative z-10 hidden lg:block">
               <motion.div
                 style={{ 
-                  x: browserX,
                   scale: browserScale,
-                  opacity: browserOpacity,
+                  rotateY: browserRotateY,
+                  y: browserY,
                 }}
+                className="perspective-1000"
               >
                 <BrowserMockup />
               </motion.div>
